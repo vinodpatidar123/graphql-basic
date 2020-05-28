@@ -15,8 +15,8 @@ function App() {
     <ApolloProvider client={client}>
     <div id="main">
       <h1>GraphQl Reading List</h1>
-      <BookList />
       <AddBook />
+      <BookList />
     </div>
     </ApolloProvider>
   );
