@@ -1,11 +1,14 @@
 const express  = require("express");
 const graphqlHTTP = require("express-graphql");
 const app = express();
-const schema = require("../server/schema/schema");
+const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-mongoose.connect("mongodb://127.0.0.1:27017/graphql-demo",{ useNewUrlParser: true, useUnifiedTopology: true });
+const port = process.env.PORT || 4000;
+const db_url = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/graphql-demo";
+
+mongoose.connect(db_url,{ useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open',()=>{
     console.log("DB Connected");
 })
@@ -21,6 +24,6 @@ app.use("/graphql",graphqlHTTP({
 
 
 
-app.listen(4000,()=>{
-    console.log("Server is listening on port 4000");
+app.listen(port,()=>{
+    console.log("Server is listening on port",port);
 })
